@@ -7,11 +7,7 @@
       <button data-toggle="modal" data-target="#addRoom" class="btn btn-info">add room</button>
     </div>
     <div class="row mt-5">
-<<<<<<< HEAD
       <div v-for="element in listrooms" :key="element[0]" v-if="element[1].start==false" class="col-md-4 mt-2">
-=======
-      <div v-for="element in listrooms" :key="element[0]" class="col-md-4 mt-2">
->>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
         <!-- Card -->
         <div class="card card-cascade narrower card-ecommerce">
           <!-- Card content -->
@@ -98,11 +94,7 @@ export default {
         let self= this
       firebase
         .database()
-<<<<<<< HEAD
         .ref("/rooms/" + input[0])
-=======
-        .ref("/" + input[0])
->>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
         .update({
           player2: {
             name: localStorage.getItem("user"),
@@ -118,11 +110,7 @@ export default {
       let self = this;
       firebase
         .database()
-<<<<<<< HEAD
         .ref("/rooms")
-=======
-        .ref("/")
->>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
         .push({
           name: self.roomName,
           player1: {
@@ -142,11 +130,7 @@ export default {
     let self = this;
     firebase
       .database()
-<<<<<<< HEAD
       .ref("/rooms")
-=======
-      .ref("/")
->>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
       .on("value", function(payload) {
         if (payload.val()) {
           let data = Object.entries(payload.val());

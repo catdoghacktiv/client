@@ -55,7 +55,8 @@ export default {
     }
  },
  created() {
-     this.getData()
+    //  let id = 
+    //  this.getData()
  },   
 }
 </script>
