@@ -27,6 +27,22 @@ export default new Router({
       path : '/game/:id',
       name : 'game-board',
       component :() => import( /* webpackChunkName: "about" */ './views/game.vue')
+    },
+    {
+      path: '/loby',
+      name: 'loby',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/loby.vue')
+    },
+    {
+      path: '/room/:id',
+      name: 'room',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/room.vue')
     }
   ]
 })
