@@ -2,7 +2,7 @@
   <div>
     <div class="container">
       <!-- <button class="btn btn-primary" @click="getData">Ambil data room 1</button> -->
-      
+
       <button class="btn btn-primary" @click="checkWin" v-if="!winner && allData.player1 && gameTurn == myself">Attack</button>
       <!-- <p v-else-if="!winner && allData.player1 && gameTurn == myself">Waiting for enemy turn ...</p> -->
       <p v-else-if="gameTurn !== myself && !winner ">Waiting for enemy turn ...</p>

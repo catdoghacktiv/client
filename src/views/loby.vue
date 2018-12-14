@@ -15,8 +15,8 @@
             <hr>
             <ul style="list-style-type: none">
               <li v-for="element in lsitChat" :key="element[0]"> <strong> <b>{{element[1].name}}</b>:</strong> {{element[1].val}} </li>
-             
-             
+
+
             </ul>
           <form @submit.prevent="submitChat">
             <input v-model="chat" type="text" class=" form-control">
@@ -70,6 +70,7 @@ export default {
         self.lsitChat = filtered
       }
     })
+
   }
 };
 </script>

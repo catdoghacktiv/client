@@ -172,7 +172,6 @@ export default {
         }
 
         if( payload.val().start == true){
-            console.log(self.$route.params.id)
             self.$router.push('/game/' + self.$route.params.id)
         }
       });
