@@ -103,7 +103,11 @@ export default {
   },
   methods: {
     start() {
+<<<<<<< HEAD
       firebase.database().ref('/rooms/'+this.$route.params.id).update({
+=======
+      firebase.database().ref('/'+this.$route.params.id).update({
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
           start: true
       })
     },
@@ -113,7 +117,11 @@ export default {
         if (self.rooms.player1.name == localStorage.getItem("user")) {
           firebase
             .database()
+<<<<<<< HEAD
             .ref("/rooms/" + self.$route.params.id + "/player1")
+=======
+            .ref("/" + self.$route.params.id + "/player1")
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
             .update({
               ready: true
             });
@@ -122,7 +130,11 @@ export default {
         if (self.rooms.player2.name == localStorage.getItem("user")) {
           firebase
             .database()
+<<<<<<< HEAD
             .ref("/rooms/" + self.$route.params.id + "/player2")
+=======
+            .ref("/" + self.$route.params.id + "/player2")
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
             .update({
               ready: true
             });
@@ -135,7 +147,11 @@ export default {
         if (self.rooms.player1.name == localStorage.getItem("user")) {
           firebase
             .database()
+<<<<<<< HEAD
             .ref("/rooms/" + self.$route.params.id + "/player1")
+=======
+            .ref("/" + self.$route.params.id + "/player1")
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
             .update({
               ready: false
             });
@@ -144,7 +160,11 @@ export default {
         if (self.rooms.player2.name == localStorage.getItem("user")) {
           firebase
             .database()
+<<<<<<< HEAD
             .ref("/rooms/" + self.$route.params.id + "/player2")
+=======
+            .ref("/" + self.$route.params.id + "/player2")
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
             .update({
               ready: false
             });
@@ -156,7 +176,11 @@ export default {
     let self = this;
     firebase
       .database()
+<<<<<<< HEAD
       .ref("/rooms/" + this.$route.params.id)
+=======
+      .ref("/" + this.$route.params.id)
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
       .on("value", function(payload) {
         self.rooms = payload.val();
         if (payload.val().player1.ready == true) {
@@ -172,7 +196,11 @@ export default {
         }
 
         if( payload.val().start == true){
+<<<<<<< HEAD
             console.log(self.$route.params.id)
+=======
+            // console.log(self.$route.params.id)
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
             self.$router.push('/game/' + self.$route.params.id)
         }
       });

@@ -1,6 +1,7 @@
 <template>
   <div>
     <navbar/>
+<<<<<<< HEAD
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-1">
@@ -25,19 +26,28 @@
           </div>
         </div>
       </div>
+=======
+    <div class="container">
+        <listroom/>
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
     </div>
   </div>
 </template>
 
 <script>
 import navbar from "../components/navbar.vue";
+<<<<<<< HEAD
 import listroom from "../components/listRoom.vue";
 import firebase from "../firebase/index.js"
+=======
+import listroom from "../components/listRoom.vue"
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
 export default {
   components: {
     navbar,
     listroom
   },
+<<<<<<< HEAD
   data(){
     return {
       chat: '',
@@ -56,10 +66,13 @@ export default {
       })
     }
   },
+=======
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
   mounted() {
     if (!localStorage.getItem("user")) {
       this.$router.push("/");
     }
+<<<<<<< HEAD
     let self = this
     firebase.database().ref('/messages').on('value', function(payload){
       let data = Object.entries(payload.val())
@@ -70,6 +83,9 @@ export default {
         self.lsitChat = filtered
       }
     })
+=======
+    
+>>>>>>> 782080828a074b0a578ac54527d05c8844fcc127
   }
 };
 </script>
