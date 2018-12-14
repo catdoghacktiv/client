@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-if="!cekWin" id="game-board" style="min-height:600px">
+    <div v-if="!cekWin" id="game-board" style="min-height:100vh">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -25,19 +25,19 @@
                    </div>
                    <div v-else-if="x === player2.x && y === player2.y">
                         <h5 class="font-weight-bold"> {{ room.player2.name}}</h5>
-                        <img class="img-fluid" style="width:200px" src='../assets/dog.png'>
+                        <img class="img-fluid" style="width:200px" src='../assets/dog.gif'>
                         <mybuttonattack v-if="gameTurn === room.player2.name && myself ===  room.player2.name"/>
                    </div>
                    <div v-else-if="y === bom.y && x === bom.x" style="transform : rotate(180deg)">
                      <div v-if="x === 4">
-                           <img class="img-fluid" src="../assets/explo.gif" alt="explo">
+                           <img class="img-fluid" src="../assets/boom.gif" alt="explo" style="z-index:1000">
                      </div>
                      <div v-else>
                         <img class="img-fluid" src="../assets/rocket.gif">
                      </div>
                    </div>
                    <div v-else>
-                       {{x}} {{y}}
+                       <!-- {{x}} {{y}} -->
                    </div>
                </div>
             </div>
@@ -48,10 +48,10 @@
         <div id="kamekamehaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div id="goku">   
+                    <div id="goku">
                         <img  src="../assets/kamekameha.gif" style="height:100vh">
                     </div>
-                    <div id=explosion>
+                    <div id="explosion">
                         <img src="../assets/boom.gif" style="height:100vh; display:hidden; z-index:3;"/>
                     </div>
                 </div>
@@ -59,18 +59,14 @@
         </div>
     </div>
     <div v-else>
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
+      {{ winnermodal}}
+      <winnermodal :winner="winner" :open="open"/>
     </div>
 </div>
 </template>
 <script>
 import mybuttonattack from '@/components/button-attack.vue'
+import winnermodal from  '@/components/winner.vue'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 export default {
@@ -79,6 +75,7 @@ export default {
     },
     data(){
         return {
+          open:false,
             col : 6,
             row : 4,
             player1 : {
@@ -105,9 +102,9 @@ export default {
                     time +=1
                     if  ( time === 3){
                         $('#goku').hide()
-                        $('#explosion').show()  
+                        $('#explosion').show()
                     }
-                }, 1000)
+                }, 300)
             })
         },
         displayBom(y){
@@ -122,6 +119,8 @@ export default {
                 }
 
             }, 3000)
+        },openmodal(){
+          this.open=true
         }
     },
     computed : {
@@ -171,8 +170,9 @@ export default {
 <style scoped>
     #game-board {
       background: url('../assets/background.jpg');
-      background-size : cover;
+      background-size :cover;
       background-repeat: no-repeat;
+      min-height: 100vh;
       z-index: -1;
     }
    .modal-dialog {

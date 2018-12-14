@@ -66,7 +66,7 @@ export default new Vuex.Store({
     //     }
     //   }
     //   // update[turn].healt = state.room[turn].healt - 1
-   
+
     //   let target = turn === 'player1' ? 'player2' : 'player1'
     //   // let name = state.room.target.name
 
@@ -74,7 +74,7 @@ export default new Vuex.Store({
     //     health: state.room[target].health - demage,
     //     name: state.room[target].name
     //   }
-      
+
     //   if (update[target].health === 0){
     //     state.winner = turn
     //   }
@@ -84,7 +84,7 @@ export default new Vuex.Store({
     //   console.log(state.roomId, 'ini state room idnya ')
     //  firebase.database().ref('/rooms/'+state.roomId).update(update)
     //   // console.log('this is from mutation attack', state.room.turn)
-      
+
     },
     setWind(state, payload){
       firebase.database().ref('/rooms/'+state.roomId).update({
@@ -138,7 +138,7 @@ export default new Vuex.Store({
         }
       }
       // update[turn].healt = state.room[turn].healt - 1
-   
+
       let target = turn === 'player1' ? 'player2' : 'player1'
       // let name = state.room.target.name
 
@@ -146,7 +146,7 @@ export default new Vuex.Store({
         health: state.room[target].health - demage,
         name: state.room[target].name
       }
-      
+
       if (update[target].health === 0){
         state.winner = turn
       }
@@ -160,7 +160,7 @@ export default new Vuex.Store({
     setWind( { commit}  ) {
       let wind = Math.random() * (5 - 0) + 0;
       commit('setWind', wind)
-    }, 
+    },
     addId({commit}, payload) {
       commit('addId', payload)
     }
