@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from '@/firebase/index'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -64,5 +63,6 @@ export default new Vuex.Store({
       // console.log('this is from attack actions')
       commit('attack')
     }
+     
   }
 })
