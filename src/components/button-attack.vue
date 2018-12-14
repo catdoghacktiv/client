@@ -1,10 +1,11 @@
 <template>
     <div>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" :style="{ 'width': persenConvert }"  aria-valuemin="0" aria-valuemax="5"></div>
+            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" :style="{ 'width': persenConvert }"  aria-valuemin="0" aria-valuemax="3"></div>
         </div>
         <div>
-            <button v-if="status === 'ready'" @click="ready" class="btn btn-danger rounded-circle mr-3">
+            <!-- v-if="!winner && allData.player1 && gameTurn == myself && status === 'ready'"  -->
+            <button v-if="status == 'ready'" @click="ready" class="btn btn-danger rounded-circle mr-3">
                 Ready
             </button>
             <button v-else @click="attack" class="btn btn-success rounded-circle mr-3">
@@ -14,6 +15,8 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
  data(){
      return {
@@ -23,11 +26,12 @@ export default {
      }
  },
  methods : {
+       ...mapActions(['getData','setWinner','attack']),
      ready(){
          this.status = 'attack'
          let status = 'increment'
          this.attackInterval = setInterval( () => {
-             if ( this.jarak < 5 && status === 'increment' ){
+             if ( this.jarak < 3 && status === 'increment' ){
                  this.jarak += 1
              }else{
                status = 'decrement'
@@ -40,14 +44,18 @@ export default {
      },
      attack(){
          clearInterval(this.attackInterval)
+         this.$store.dispatch('attack',this.jarak)
      }
  }, 
  computed : {
      persenConvert(){
-        let persen = ((this.jarak /5)*100)+'%'
+        let persen = ((this.jarak /3)*100)+'%'
         console.log('persen :', persen)
         return persen
     }
- }   
+ },
+ created() {
+     this.getData()
+ },   
 }
 </script>

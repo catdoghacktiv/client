@@ -1,35 +1,40 @@
 <template>
-    <div id="game-board" style="min-height:600px">
+<div>
+    <div v-if="!cekWin" id="game-board" style="min-height:600px">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="{ 'width': '75%'' }"  aria-valuemin="0" aria-valuemax="100"></div>
+                    <div v-if="room.player1" class="progress">
+                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" :style="{ 'width': darahPlayer1 }"  aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div  v-if="room.player2" class="col-sm-6">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="{ 'width': '75%' }"  aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" :style="{ 'width':  darahPlayer2 }"  aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
+        <div v-if="room.player1" class="container-fluid">
             <div v-for="x in row" :key="x" class="row" style="height:100px">
                <div v-for="y in col" :key="y" class="col-2">
-                   <div v-if="x === cat.x && y === cat.y">
-                        <h5 class="font-weight-bold"> Player 2</h5>
-                        <img class="img-fluid" style="width:200px" src='../assets/cat.png'>
-                        <mybuttonattack/>
+                   <div v-if="x === player1.x && y === player1.y">
+                        <h5 class="font-weight-bold">{{ room.player1.name}}</h5>
+                        <img class="img-fluid" style="width:200px" src='../assets/cat.gif'>
+                        <mybuttonattack v-if="gameTurn === room.player1.name && myself ===  room.player1.name"/>
                    </div>
-                   <div v-else-if="x === dog.x && y === dog.y">
-                        <h5 class="font-weight-bold"> Player 2</h5>
+                   <div v-else-if="x === player2.x && y === player2.y">
+                        <h5 class="font-weight-bold"> {{ room.player2.name}}</h5>
                         <img class="img-fluid" style="width:200px" src='../assets/dog.png'>
-                        <mybuttonattack/>
+                        <mybuttonattack v-if="gameTurn === room.player2.name && myself ===  room.player2.name"/>
                    </div>
                    <div v-else-if="y === bom.y && x === bom.x" style="transform : rotate(180deg)">
-                       <img v-if="(x === dog.x && y === dog.y)" class="img-fluid" src="../assets/explosion.png" style="z-index:2">
-                      <img v-else class="img-fluid" src="../assets/rocket.gif">
+                     <div v-if="x === 4">
+                           <img class="img-fluid" src="../assets/explo.gif" alt="explo">
+                     </div>
+                     <div v-else>
+                        <img class="img-fluid" src="../assets/rocket.gif">
+                     </div>
                    </div>
                    <div v-else>
                        {{x}} {{y}}
@@ -37,6 +42,8 @@
                </div>
             </div>
         </div>
+        {{showBom}}
+        {{ cekWin}}
         <button class="btn btn-dark" @click="openModal">Open</button>
         <div id="kamekamehaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -51,9 +58,21 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+    </div>
+</div>
 </template>
 <script>
 import mybuttonattack from '@/components/button-attack.vue'
+import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
     components : {
         mybuttonattack
@@ -62,11 +81,11 @@ export default {
         return {
             col : 6,
             row : 4,
-            dog : {
+            player1 : {
                 x : 4,
                 y : 2
             },
-            cat : {
+            player2 : {
                 x : 4,
                 y : 5
             },
@@ -77,6 +96,7 @@ export default {
         }
     },
     methods :{
+        ...mapActions(['getData','setWinner','attack','setWind']),
         openModal(){
             $('#kamekamehaModal').modal('show')
             $('#kamekamehaModal').on('shown.bs.modal', function (e) {
@@ -104,8 +124,38 @@ export default {
             }, 3000)
         }
     },
+    computed : {
+        ...mapState(["value",
+                     "room",
+                     "winner",
+                     "gameTurn",
+                     "myself"]),
+        showBom(){
+            if ( this.room.operation !== false){
+                this.displayBom(this.room.operation)
+            }
+            return
+        },
+        darahPlayer1(){
+            let persen = (this.room.player1.healt/3)*100 +'%'
+            return persen
+        },
+        darahPlayer2(){
+            let persen = (this.room.player2.healt/3)*100 +'%'
+            return persen
+        },
+        cekWin(){
+            if( this.$store.state.winner ){
+                return true
+            }else{
+                return false
+            }
+        }
+    },
     created(){
-        this.displayBom(2)
+        // localStorage.setItem('name', 'user1')
+        this.displayBom(1)
+        this.getData()
     }
 }
 </script>
