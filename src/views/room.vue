@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     start() {
-      firebase.database().ref('/'+this.$route.params.id).update({
+      firebase.database().ref('/rooms/'+this.$route.params.id).update({
           start: true
       })
     },
@@ -113,7 +113,7 @@ export default {
         if (self.rooms.player1.name == localStorage.getItem("user")) {
           firebase
             .database()
-            .ref("/" + self.$route.params.id + "/player1")
+            .ref("/rooms/" + self.$route.params.id + "/player1")
             .update({
               ready: true
             });
@@ -122,7 +122,7 @@ export default {
         if (self.rooms.player2.name == localStorage.getItem("user")) {
           firebase
             .database()
-            .ref("/" + self.$route.params.id + "/player2")
+            .ref("/rooms/" + self.$route.params.id + "/player2")
             .update({
               ready: true
             });
@@ -135,7 +135,7 @@ export default {
         if (self.rooms.player1.name == localStorage.getItem("user")) {
           firebase
             .database()
-            .ref("/" + self.$route.params.id + "/player1")
+            .ref("/rooms/" + self.$route.params.id + "/player1")
             .update({
               ready: false
             });
@@ -144,7 +144,7 @@ export default {
         if (self.rooms.player2.name == localStorage.getItem("user")) {
           firebase
             .database()
-            .ref("/" + self.$route.params.id + "/player2")
+            .ref("/rooms/" + self.$route.params.id + "/player2")
             .update({
               ready: false
             });
@@ -156,7 +156,7 @@ export default {
     let self = this;
     firebase
       .database()
-      .ref("/" + this.$route.params.id)
+      .ref("/rooms/" + this.$route.params.id)
       .on("value", function(payload) {
         self.rooms = payload.val();
         if (payload.val().player1.ready == true) {
@@ -172,7 +172,7 @@ export default {
         }
 
         if( payload.val().start == true){
-            // console.log(self.$route.params.id)
+            console.log(self.$route.params.id)
             self.$router.push('/game/' + self.$route.params.id)
         }
       });
