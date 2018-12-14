@@ -1,6 +1,6 @@
 <template id="modalwinner">
 <!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="winnerModalalertandcongrats" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,10 +14,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Start a New Game</button>
+        <button type="button" class="btn btn-primary">Back to Lobby</button>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -53,14 +54,22 @@
 // </transition>
 
   export default{
-    computed:{
-      winner(){
-        this.$store.dispatch("winner")
+    name :'winnermodal',
+    props:['winner'],
+    data(){
+      return{
+
       }
     }
   }
 </script>
 
 <style>
+/*  stylenya gak penting cuman buat nambah2in character dan set stylenya
+didalam modal yang sebenarnya gak perlu tapi tetep harus dijalanin dan
+dijalankan*/
+  #modalwinner{
+    background-color:aqua;
 
+  }
 </style>

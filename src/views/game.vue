@@ -48,10 +48,10 @@
         <div id="kamekamehaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div id="goku">   
+                    <div id="goku">
                         <img  src="../assets/kamekameha.gif" style="height:100vh">
                     </div>
-                    <div id=explosion>
+                    <div id="explosion">
                         <img src="../assets/boom.gif" style="height:100vh; display:hidden; z-index:3;"/>
                     </div>
                 </div>
@@ -59,18 +59,14 @@
         </div>
     </div>
     <div v-else>
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, world!</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
+      {{ winnermodal}}
+      <winnermodal :winner="winner"/>
     </div>
 </div>
 </template>
 <script>
 import mybuttonattack from '@/components/button-attack.vue'
+import winnermodal from  '@/components/winner.vue'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 export default {
@@ -105,7 +101,7 @@ export default {
                     time +=1
                     if  ( time === 3){
                         $('#goku').hide()
-                        $('#explosion').show()  
+                        $('#explosion').show()
                     }
                 }, 1000)
             })
@@ -122,6 +118,8 @@ export default {
                 }
 
             }, 3000)
+        },openmodal(){
+          $('#winnerModalalertandcongrats').modal('show')
         }
     },
     computed : {
