@@ -137,12 +137,18 @@ export default {
             return
         },
         darahPlayer1(){
-            let persen = (this.room.player1.healt/3)*100 +'%'
-            return persen
+            if (this.room) {
+                let persen = (this.room.player1.health/3)*100 +'%'
+                return persen
+            }
+            return false
         },
         darahPlayer2(){
-            let persen = (this.room.player2.healt/3)*100 +'%'
-            return persen
+            if (this.room) {
+                let persen = (this.room.player2.health/3)*100 +'%'
+                return persen
+            }
+            return 0
         },
         cekWin(){
             if( this.$store.state.winner ){
@@ -152,10 +158,13 @@ export default {
             }
         }
     },
-    created(){
+    mounted(){
         // localStorage.setItem('name', 'user1')
-        this.displayBom(1)
-        this.getData()
+        // this.displayBom(1)
+        let id = this.$route.params.id
+        console.log(id, '=-==-= id room -=-=-')
+        this.$store.dispatch('addId', id)
+        this.getData(id)
     }
 }
 </script>
