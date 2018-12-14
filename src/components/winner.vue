@@ -11,10 +11,11 @@
       </div>
       <div class="modal-body">
         <h1>And The Winner Is {{winner}}</h1>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Back to Lobby</button>
+      <router-link to="/loby"><button type="button" class="btn btn-primary">Back to Lobby</button></router-link>  
       </div>
     </div>
   </div>
@@ -55,10 +56,17 @@
 
   export default{
     name :'winnermodal',
-    props:['winner'],
+    props:['winner',"open"],
     data(){
       return{
 
+      }
+    },
+    watch:{
+      open(){
+        if(this.open){
+          $('#winnerModalalertandcongrats').modal('show')
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-if="!cekWin" id="game-board" style="min-height:600px">
+    <div v-if="!cekWin" id="game-board" style="min-height:100vh">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -25,19 +25,19 @@
                    </div>
                    <div v-else-if="x === player2.x && y === player2.y">
                         <h5 class="font-weight-bold"> {{ room.player2.name}}</h5>
-                        <img class="img-fluid" style="width:200px" src='../assets/dog.png'>
+                        <img class="img-fluid" style="width:200px" src='../assets/dog.gif'>
                         <mybuttonattack v-if="gameTurn === room.player2.name && myself ===  room.player2.name"/>
                    </div>
                    <div v-else-if="y === bom.y && x === bom.x" style="transform : rotate(180deg)">
                      <div v-if="x === 4">
-                           <img class="img-fluid" src="../assets/explo.gif" alt="explo">
+                           <img class="img-fluid" src="../assets/boom.gif" alt="explo" style="z-index:1000">
                      </div>
                      <div v-else>
                         <img class="img-fluid" src="../assets/rocket.gif">
                      </div>
                    </div>
                    <div v-else>
-                       {{x}} {{y}}
+                       <!-- {{x}} {{y}} -->
                    </div>
                </div>
             </div>
@@ -60,7 +60,7 @@
     </div>
     <div v-else>
       {{ winnermodal}}
-      <winnermodal :winner="winner"/>
+      <winnermodal :winner="winner" :open="open"/>
     </div>
 </div>
 </template>
@@ -75,6 +75,7 @@ export default {
     },
     data(){
         return {
+          open:false,
             col : 6,
             row : 4,
             player1 : {
@@ -103,7 +104,7 @@ export default {
                         $('#goku').hide()
                         $('#explosion').show()
                     }
-                }, 1000)
+                }, 300)
             })
         },
         displayBom(y){
@@ -119,7 +120,7 @@ export default {
 
             }, 3000)
         },openmodal(){
-          $('#winnerModalalertandcongrats').modal('show')
+          this.open=true
         }
     },
     computed : {
@@ -169,8 +170,9 @@ export default {
 <style scoped>
     #game-board {
       background: url('../assets/background.jpg');
-      background-size : cover;
+      background-size :cover;
       background-repeat: no-repeat;
+      min-height: 100vh;
       z-index: -1;
     }
    .modal-dialog {
