@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <attackbutton/>
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -30,8 +31,12 @@
 </template>
 
 <script>
+import attackbutton from '@/components/button-attack.vue'
 export default {
   name: 'HelloWorld',
+  components: {
+    attackbutton
+  },
   props: {
     msg: String
   }

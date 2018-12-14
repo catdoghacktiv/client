@@ -23,5 +23,10 @@ export default new Router({
       name: 'hit',
       component: () => import(/* webpackChunkName: "about" */ './views/Hit.vue')
     },
+    {
+      path : '/game/:id',
+      name : 'game-board',
+      component :() => import( /* webpackChunkName: "about" */ './views/game.vue')
+    }
   ]
 })
